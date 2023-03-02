@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package grpc;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/duration.proto";
+
+option go_package = "cloudcamp/Part_two/proto/sourse";
+
+service Playlist {
+  rpc Play(google.protobuf.Empty) returns (google.protobuf.Empty);
+  rpc Pause(google.protobuf.Empty) returns (google.protobuf.Empty);
+  rpc Next(google.protobuf.Empty) returns (google.protobuf.Empty);
+  rpc Prev(google.protobuf.Empty) returns (google.protobuf.Empty);
+  rpc Create(CreateSongRequest) returns (google.protobuf.Empty);
+  rpc Delete(DeleteSongRequest) returns (google.protobuf.Empty);
+  rpc ReadSong(google.protobuf.Empty) returns (ReadSongResponse);
+  rpc ReadPlaylist(google.protobuf.Empty) returns (ReadPlaylistResponse);
+  rpc Update(UpdateSongRequest) returns (google.protobuf.Empty);
+}
+
+message UpdateSongRequest {
+  string author = 1;
+  string title = 2;
+  Song song = 3;
+}
+message Song {
+  string author = 1;
+  string title = 2;
+  google.protobuf.Duration dur = 3;
+}
+
+message CreateSongRequest {
+  Song song = 1;
+}
+
+message ReadPlaylistResponse{
+  repeated Song songs = 1;
+}
+
+message ReadSongResponse{
+  Song song = 1;
+}
+
+message DeleteSongRequest {
+  string author = 1;
+  string title = 2;
+}
