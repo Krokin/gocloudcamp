@@ -1,0 +1,10 @@
+version: "3.4"
+
+services:
+  server:
+    build: .
+    container_name: serverPlaylist
+    hostname: playlist
+    ports:
+      - "8080:8080"
+    restart: on-failure

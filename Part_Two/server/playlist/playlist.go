@@ -1,12 +1,11 @@
 package playlist
 
 import (
-	"fmt"
 	"os"
 	"sync"
 	"time"
 
-	"main/Part_Two/server/errors"
+	"github.com/Krokin/gocloudcamp/Part_Two/server/errors"
 
 	jsoniter "github.com/json-iterator/go"
 )
@@ -54,7 +53,7 @@ func NewPlaylist() *SongsPlaylist {
 	return s
 }
 
-//эмулирует воспроизведение песни
+// эмулирует воспроизведение песни
 func ControlPlay(s *SongsPlaylist) {
 	var t = new(time.Ticker)
 	var dur time.Duration
@@ -92,7 +91,6 @@ type Song struct {
 }
 
 func NewSong(title string, author string, dur time.Duration) (*Song, error) {
-	fmt.Println(dur)
 	if title == "" || author == "" || dur < time.Second {
 		return nil, errors.ErrorNotValid
 	}
@@ -261,7 +259,7 @@ func (d *SongsPlaylist) Prev() error {
 }
 
 func (d *SongsPlaylist) LoadPlaylist() error {
-	b, err := os.ReadFile("Part_Two/data/playlist.json")
+	b, err := os.ReadFile("playlist.json")
 	if err != nil {
 		return err
 	}
@@ -284,7 +282,7 @@ func (d *SongsPlaylist) LoadPlaylist() error {
 
 func (d *SongsPlaylist) SavePlaylist() error {
 	playlist, _ := d.ReadPlaylist()
-	f, err := os.Create("Part_Two/data/playlist.json")
+	f, err := os.Create("playlist.json")
 	if err != nil {
 		return err
 	}

@@ -3,10 +3,10 @@ package server
 import (
 	"context"
 
-	pb "main/Part_Two/proto"
-	"main/Part_Two/server/errors"
-	log "main/Part_Two/server/logger"
-	pl "main/Part_Two/server/playlist"
+	pb "github.com/Krokin/gocloudcamp/Part_Two/proto"
+	"github.com/Krokin/gocloudcamp/Part_Two/server/errors"
+	log "github.com/Krokin/gocloudcamp/Part_Two/server/logger"
+	pl "github.com/Krokin/gocloudcamp/Part_Two/server/playlist"
 
 	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/protobuf/types/known/durationpb"
