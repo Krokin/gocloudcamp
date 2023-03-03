@@ -17,7 +17,7 @@ func main() {
 	srv := s.NewServer()
 	//сохранение данных при получении сигнала завершения от os
 	closer.Bind(func() {
-		err := srv.P.SavePlaylist()
+		err := srv.P.SavePlaylist("playlist.json")
 		if err != nil {
 			srv.Logger.Log.Error(err)
 		} else {
@@ -26,7 +26,7 @@ func main() {
 		srv.Logger.Log.Printf("Exit server")
 	})
 	//загрузка конфигурации
-	conf, err := config.LoadConfig()
+	conf, err := config.LoadConfig("./config.yaml")
 	if err != nil {
 		srv.Logger.Log.Fatal(err)
 	}

@@ -15,8 +15,8 @@ func NewConfig() *Config {
 	return &Config{}
 }
 
-func LoadConfig() (*Config, error) {
-	file, err := os.Open("./config.yaml")
+func LoadConfig(path string) (*Config, error) {
+	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}

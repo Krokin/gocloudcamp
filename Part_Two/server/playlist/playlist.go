@@ -2,6 +2,7 @@ package playlist
 
 import (
 	"os"
+	"reflect"
 	"sync"
 	"time"
 
@@ -28,7 +29,7 @@ type Playlister interface {
 	UpdateInfo(title string, author string, data Song) error
 	DeleteSong(title string, author string) error
 	CreateSong(title string, author string, dur time.Duration) error
-	SavePlaylist() error
+	SavePlaylist(path string) error
 }
 
 type SongsPlaylist struct {
@@ -145,7 +146,7 @@ func (d *SongsPlaylist) DeleteSong(title string, author string) error {
 	if node == nil {
 		return errors.ErrorNotFound
 	}
-	if node == d.curr && d.play {
+	if reflect.DeepEqual(node.data, d.curr.data) && d.play {
 		return errors.ErrorPlaySongNow
 	}
 	d.mu.Lock()
@@ -194,9 +195,6 @@ func (d *SongsPlaylist) Play() error {
 	}
 	d.mu.Lock()
 	d.play = true
-	if d.curr == nil {
-		d.curr = d.head
-	}
 	d.mu.Unlock()
 	d.control <- play
 	return nil
@@ -258,8 +256,8 @@ func (d *SongsPlaylist) Prev() error {
 	return nil
 }
 
-func (d *SongsPlaylist) LoadPlaylist() error {
-	b, err := os.ReadFile("playlist.json")
+func (d *SongsPlaylist) LoadPlaylist(path string) error {
+	b, err := os.ReadFile(path)
 	if err != nil {
 		return err
 	}
@@ -280,9 +278,9 @@ func (d *SongsPlaylist) LoadPlaylist() error {
 	return nil
 }
 
-func (d *SongsPlaylist) SavePlaylist() error {
+func (d *SongsPlaylist) SavePlaylist(path string) error {
 	playlist, _ := d.ReadPlaylist()
-	f, err := os.Create("playlist.json")
+	f, err := os.Create(path)
 	if err != nil {
 		return err
 	}

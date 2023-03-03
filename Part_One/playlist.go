@@ -1,7 +1,6 @@
 package Part_One
 
 import (
-	"fmt"
 	"sync"
 	"time"
 )
@@ -51,7 +50,6 @@ func NewPlaylist() *SongsPlaylist {
 }
 
 func NewSong(title string, author string, dur time.Duration) (*Song, error) {
-	fmt.Println(dur)
 	if title == "" || author == "" || dur < time.Second {
 		return nil, ErrorNotValid
 	}
@@ -94,9 +92,6 @@ func (d *SongsPlaylist) Play() error {
 	}
 	d.mu.Lock()
 	d.play = true
-	if d.curr == nil {
-		d.curr = d.head
-	}
 	d.mu.Unlock()
 	d.control <- play
 	return nil

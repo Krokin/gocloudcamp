@@ -21,7 +21,7 @@ type Server struct {
 func NewServer() *Server {
 	logger := log.NewLogger()
 	playlist := pl.NewPlaylist()
-	if err := playlist.LoadPlaylist(); err != nil {
+	if err := playlist.LoadPlaylist("playlist.json"); err != nil {
 		logger.Log.Println("Playlist created")
 	} else {
 		logger.Log.Println("Playlist load")
