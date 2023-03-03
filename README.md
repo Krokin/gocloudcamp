@@ -54,12 +54,12 @@
 Запуск симуляции обращения к сервису клиента:
 
 Клиент:
+![client](https://user-images.githubusercontent.com/116288476/222606666-e57fa863-d07d-4913-b90b-1b2c6f5864aa.png)
 
-sqren
 
 Логи сервера:
-
-скрин
+![server part1](https://user-images.githubusercontent.com/116288476/222606696-3712a64f-da81-46fd-b2a8-a3b3a2a82906.png)
+![server part2](https://user-images.githubusercontent.com/116288476/222606702-2902bd78-d812-43f1-9011-4c8f9638b8f8.png)
 
 
 #### Запуск сервиса:
